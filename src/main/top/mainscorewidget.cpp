@@ -68,6 +68,7 @@ void MainScoreWidget::initButtonLayout()
     m_stackedWidget->addWidget(reStaticButton);
 }
 
+
 void MainScoreWidget::setButtonStatus(int status)
 {
     switch (status) {

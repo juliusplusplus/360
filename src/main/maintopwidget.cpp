@@ -27,7 +27,8 @@ void MainTopWidget::initAnimations()
     QRect mainRect(0, 0, width(), 240);
     QRect origRect = rect();
     QPoint origPoint = m_scoreWidget->pos();
-    QPoint toPoint(0, m_titleWidget->height() + 10);
+    QPoint toPoint(0, m_userWidget->height() + 10);
+//    QPoint toPoint(0, m_titleWidget->height() + 10);
 
     QPropertyAnimation *mainExamineAnim = new QPropertyAnimation(this, "geometry");
     mainExamineAnim->setDuration(200);
@@ -67,7 +68,7 @@ void MainTopWidget::initUI()
     m_backgroundWidget = new WenliWidget(this);
     m_backgroundWidget->setGeometry(rect());
     m_backgroundWidget->lower();
-    this->initTopTitleWidget();
+//    this->initTopTitleWidget();
 
     m_userWidget = new  UserWidget(this);
     m_userWidget->setFixedWidth(width());
@@ -83,52 +84,52 @@ void MainTopWidget::initUI()
     updateSizeAndPos();
 }
 
-void MainTopWidget::initTopTitleWidget()
-{
-    m_titleWidget = new QWidget(this);
-    m_titleWidget->setAttribute(Qt::WA_TranslucentBackground);
-    m_titleWidget->setFixedWidth(width());
-    m_titleWidget->move(0, 0);
+//void MainTopWidget::initTopTitleWidget()
+//{
+//    m_titleWidget = new QWidget(this);
+//    m_titleWidget->setAttribute(Qt::WA_TranslucentBackground);
+//    m_titleWidget->setFixedWidth(width());
+//    m_titleWidget->move(0, 0);
 
-    QLabel *logoLabel = new QLabel;
-    logoLabel->setPixmap(QPixmap(":/main/logo"));
-    QLabel *textLabel = new QLabel;
-    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
-    textLabel->adjustSize();
-    StaticButton *updateButton = new StaticButton(":/main/update_btn");
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->addWidget(logoLabel);
-    hLayout->addWidget(textLabel);
-    hLayout->addWidget(updateButton);
+//    QLabel *logoLabel = new QLabel;
+//    logoLabel->setPixmap(QPixmap(":/main/logo"));
+//    QLabel *textLabel = new QLabel;
+//    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
+//    textLabel->adjustSize();
+//    StaticButton *updateButton = new StaticButton(":/main/update_btn");
+//    QHBoxLayout *hLayout = new QHBoxLayout;
+//    hLayout->addWidget(logoLabel);
+//    hLayout->addWidget(textLabel);
+//    hLayout->addWidget(updateButton);
 
-    QWidget *title = new QWidget;
-    title->setAttribute(Qt::WA_TranslucentBackground);
-    title->setLayout(hLayout);
+//    QWidget *title = new QWidget;
+//    title->setAttribute(Qt::WA_TranslucentBackground);
+//    title->setLayout(hLayout);
 
-    StaticButton *returnButton = new StaticButton(":/main/return");
-    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(returnMain()));
+//    StaticButton *returnButton = new StaticButton(":/main/return");
+//    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(returnMain()));
 
-    m_titleStacked = new QStackedWidget;
-    m_titleStacked->addWidget(title);
-    m_titleStacked->addWidget(returnButton);
-    m_titleStacked->setFixedHeight(returnButton->height());
+//    m_titleStacked = new QStackedWidget;
+//    m_titleStacked->addWidget(title);
+//    m_titleStacked->addWidget(returnButton);
+//    m_titleStacked->setFixedHeight(returnButton->height());
 
-    SysButtonGroup *buttonGroup = new SysButtonGroup;
-    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
-    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
-    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
-    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
-    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
+//    SysButtonGroup *buttonGroup = new SysButtonGroup;
+//    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
+//    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
+//    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
+//    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
+//    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
 
-    QHBoxLayout *titleLayout = new QHBoxLayout;
-    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
-    titleLayout->addStretch();
-    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
-    titleLayout->setContentsMargins(0, 0, 0, 0);
+//    QHBoxLayout *titleLayout = new QHBoxLayout;
+//    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
+//    titleLayout->addStretch();
+//    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
+//    titleLayout->setContentsMargins(0, 0, 0, 0);
 
-    m_titleWidget->setLayout(titleLayout);
+//    m_titleWidget->setLayout(titleLayout);
 
-}
+//}
 
 void MainTopWidget::initConnect()
 {
@@ -144,7 +145,7 @@ void MainTopWidget::setNums(int num)
 
 void MainTopWidget::updateSizeAndPos()
 {
-    m_userWidget->move(0, m_titleWidget->y() + m_titleWidget->height() + 10);
+//    m_userWidget->move(0, m_titleWidget->y() + m_titleWidget->height() + 10);
     m_scoreWidget->move(0, m_userWidget->y() + m_userWidget->height() + 10);
     m_bottomWidget->move(0, m_scoreWidget->y() + m_scoreWidget->height() + 10);
 }
