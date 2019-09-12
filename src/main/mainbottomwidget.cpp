@@ -17,7 +17,8 @@ MainBottomWidget::MainBottomWidget(QWidget *parent)
 
 void MainBottomWidget::initUI()
 {
-    this->setGeometry(0, 440, 900, 160);
+    this->setGeometry(0, 0, 900, 160);
+//    this->setGeometry(0, 440, 900, 160);
     m_stackedWidget = new QStackedLayout;
     m_firstWidget = new MainBottomFirstWidget;
     BaseStyleWidget *whiteWidget = new BaseStyleWidget;
