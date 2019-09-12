@@ -10,6 +10,13 @@ class MainExamineWidget;
 class QPropertyAnimation;
 class MainBottomFirstWidget;
 
+class QStackedWidget;
+class UserWidget;
+class WenliWidget;
+class MainScoreWidget;
+class TopBottomWidget;
+class QParallelAnimationGroup;
+
 class MainBottomWidget : public BaseStyleWidget
 {
     Q_OBJECT
@@ -25,16 +32,25 @@ private slots:
     void goExamineFinished();
     void goMainFinished();
 
+    void returnMain();
+
 signals:
     void safeClicked();
     void cleanClicked();
     void youhuaClicked();
     void advtoolMoreClicked();
 
+    void playVideo();
+    void showSkin();
+    void showMenu();
+    void showMin();
+    void closeWidget();
+
 private:
     void initUI();
     void initAnimation();
     void initConnect();
+    void initTopTitleWidget();
 
 private:
     QStackedLayout        *m_stackedWidget;
@@ -42,6 +58,10 @@ private:
     QPropertyAnimation    *m_examineAnimation;
     QPropertyAnimation    *m_returnAnimation;
     MainBottomFirstWidget *m_firstWidget;
+
+
+    QWidget                 *m_titleWidget;
+    QStackedWidget          *m_titleStacked;
 };
 
 #endif // MAINBOTTOMWIDGET_H

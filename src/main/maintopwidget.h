@@ -46,7 +46,7 @@ private slots:
 
 private:
     void initUI();
-//    void initTopTitleWidget();
+    void initTopTitleWidget();
     void initConnect();
     void initAnimations();
     void updateSizeAndPos();
