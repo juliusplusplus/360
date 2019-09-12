@@ -16,6 +16,8 @@
 MainBottomWidget::MainBottomWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
+
+    this->setStyleSheet("QWidget#firstWidget{background:white;}");
     this->initUI();
     this->initAnimation();
     this->initConnect();
@@ -23,14 +25,49 @@ MainBottomWidget::MainBottomWidget(QWidget *parent)
 
 void MainBottomWidget::initUI()
 {
-    this->setGeometry(0, 0, 900, 160);
+    this->setGeometry(0, 0, 900, 200);
 //    this->setGeometry(0, 440, 900, 160);
+
+    //标题
+    QLabel *logoLabel = new QLabel;
+    logoLabel->setPixmap(QPixmap(":/main/logo"));
+    QLabel *textLabel = new QLabel;
+    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
+    textLabel->adjustSize();
+    StaticButton *updateButton = new StaticButton(":/main/update_btn");
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    hLayout->addWidget(logoLabel);
+    hLayout->addWidget(textLabel);
+    hLayout->addWidget(updateButton);
+
+    QWidget *title = new QWidget;
+//    title->setAttribute(Qt::WA_TranslucentBackground);
+    title->setLayout(hLayout);
+
+    StaticButton *returnButton = new StaticButton(":/main/return");
+    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(goMainFinished()));
+
+    m_titleStacked = new QStackedWidget;
+    m_titleStacked->addWidget(title);
+    m_titleStacked->addWidget(returnButton);
+    m_titleStacked->setFixedHeight(returnButton->height());
+
+    SysButtonGroup *buttonGroup = new SysButtonGroup;
+    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
+    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
+    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
+    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
+    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
+
+    QHBoxLayout *titleLayout = new QHBoxLayout;
+    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
+    titleLayout->addStretch();
+    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
+    titleLayout->setContentsMargins(0, 0, 0, 0);
+
+    //切换
     m_stackedWidget = new QStackedLayout;
     m_firstWidget = new MainBottomFirstWidget;
-
-//    QVBoxLayout *t_layout = new QVBoxLayout;
-//    t_layout->addWidget(m_firstWidget);
-
     BaseStyleWidget *whiteWidget = new BaseStyleWidget;
     whiteWidget->setStyleSheet("background:white;");
     m_examineWidget = new MainExamineWidget;
@@ -39,8 +76,11 @@ void MainBottomWidget::initUI()
     m_stackedWidget->addWidget(whiteWidget);
     m_stackedWidget->addWidget(m_examineWidget);
 
-    this->initTopTitleWidget();
-    this->setLayout(m_stackedWidget);
+    QVBoxLayout *t_layout = new QVBoxLayout;
+    t_layout->addLayout(titleLayout);
+    t_layout->setContentsMargins(0, 0, 0, 0);
+    t_layout->addLayout(m_stackedWidget);
+    this->setLayout(t_layout);
 }
 
 void MainBottomWidget::initAnimation()
@@ -70,52 +110,52 @@ void MainBottomWidget::initConnect()
     connect(m_firstWidget, SIGNAL(advtoolMoreClicked()), this, SIGNAL(advtoolMoreClicked()));
 }
 
-void MainBottomWidget::initTopTitleWidget()
-{
-    m_titleWidget = new QWidget(this);
-    m_titleWidget->setAttribute(Qt::WA_TranslucentBackground);
-    m_titleWidget->setFixedWidth(width());
-    m_titleWidget->move(0, 0);
+//void MainBottomWidget::initTopTitleWidget()
+//{
+////    m_titleWidget = new QWidget(this);
+////    m_titleWidget->setAttribute(Qt::WA_TranslucentBackground);
+////    m_titleWidget->setFixedWidth(width());
+////    m_titleWidget->move(0, 0);
 
-    QLabel *logoLabel = new QLabel;
-    logoLabel->setPixmap(QPixmap(":/main/logo"));
-    QLabel *textLabel = new QLabel;
-    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
-    textLabel->adjustSize();
-    StaticButton *updateButton = new StaticButton(":/main/update_btn");
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->addWidget(logoLabel);
-    hLayout->addWidget(textLabel);
-    hLayout->addWidget(updateButton);
+//    QLabel *logoLabel = new QLabel;
+//    logoLabel->setPixmap(QPixmap(":/main/logo"));
+//    QLabel *textLabel = new QLabel;
+//    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
+//    textLabel->adjustSize();
+//    StaticButton *updateButton = new StaticButton(":/main/update_btn");
+//    QHBoxLayout *hLayout = new QHBoxLayout;
+//    hLayout->addWidget(logoLabel);
+//    hLayout->addWidget(textLabel);
+//    hLayout->addWidget(updateButton);
 
-    QWidget *title = new QWidget;
-    title->setAttribute(Qt::WA_TranslucentBackground);
-    title->setLayout(hLayout);
+//    QWidget *title = new QWidget;
+//    title->setAttribute(Qt::WA_TranslucentBackground);
+//    title->setLayout(hLayout);
 
-    StaticButton *returnButton = new StaticButton(":/main/return");
-    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(goMainFinished()));
+//    StaticButton *returnButton = new StaticButton(":/main/return");
+//    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(goMainFinished()));
 
-    m_titleStacked = new QStackedWidget;
-    m_titleStacked->addWidget(title);
-    m_titleStacked->addWidget(returnButton);
-    m_titleStacked->setFixedHeight(returnButton->height());
+//    m_titleStacked = new QStackedWidget;
+//    m_titleStacked->addWidget(title);
+//    m_titleStacked->addWidget(returnButton);
+//    m_titleStacked->setFixedHeight(returnButton->height());
 
-    SysButtonGroup *buttonGroup = new SysButtonGroup;
-    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
-    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
-    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
-    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
-    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
+//    SysButtonGroup *buttonGroup = new SysButtonGroup;
+//    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
+//    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
+//    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
+//    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
+//    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
 
-    QHBoxLayout *titleLayout = new QHBoxLayout;
-    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
-    titleLayout->addStretch();
-    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
-    titleLayout->setContentsMargins(0, 0, 0, 0);
+//    QHBoxLayout *titleLayout = new QHBoxLayout;
+//    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
+//    titleLayout->addStretch();
+//    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
+//    titleLayout->setContentsMargins(0, 0, 0, 0);
 
-    m_titleWidget->setLayout(titleLayout);
+////    m_titleWidget->setLayout(titleLayout);
 
-}
+//}
 
 
 void MainBottomWidget::goExamine()

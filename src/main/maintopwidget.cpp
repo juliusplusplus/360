@@ -63,7 +63,7 @@ void MainTopWidget::initAnimations()
 void MainTopWidget::initUI()
 {
     //this->setFixedSize(m_wenliPix.size());
-    this->setGeometry(0, 160, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
+    this->setGeometry(0, 200, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
 //    this->setGeometry(0, 0, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
     m_backgroundWidget = new WenliWidget(this);
     m_backgroundWidget->setGeometry(rect());
