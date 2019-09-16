@@ -17,7 +17,8 @@ MainBottomWidget::MainBottomWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
 
-    this->setStyleSheet("QWidget#firstWidget{background:white;}");
+    this->setStyleSheet("QWidget#mainWidget{background:white;}");
+    this->setObjectName("mainWidget");
     this->initUI();
     this->initAnimation();
     this->initConnect();
