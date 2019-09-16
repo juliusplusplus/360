@@ -63,19 +63,23 @@ void MainWindow::initConnect()
     connect(m_bottomWidget, SIGNAL(safeClicked()), this, SLOT(goToSafe()));
     connect(m_bottomWidget, SIGNAL(cleanClicked()), this, SLOT(goToClean()));
     connect(m_bottomWidget, SIGNAL(youhuaClicked()), this, SLOT(goToYouhua()));
+    connect(m_bottomWidget, SIGNAL(showMin()), this, SLOT(showMinimized()));
+    connect(m_bottomWidget, SIGNAL(closeWidget()), this, SLOT(closeWidget()));
+    connect(m_bottomWidget, SIGNAL(playVideo()), this, SLOT(playVideo()));
+    connect(m_bottomWidget, SIGNAL(showSkin()), this, SLOT(showSkin()));
     connect(m_upGroup, SIGNAL(finished()), this, SLOT(upAnimFinished()));
 }
 
 void MainWindow::initAnim()
 {
-    QPropertyAnimation *m_upMainAnimation = new QPropertyAnimation(m_topWidget, "pos");
+    QPropertyAnimation *m_upMainAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
     m_upMainAnimation->setDuration(200);
     m_upMainAnimation->setStartValue(QPoint(0, 0));
-    m_upMainAnimation->setEndValue(QPoint(0, -440));
+    m_upMainAnimation->setEndValue(QPoint(0, -200));
 
-    QPropertyAnimation *m_downMainAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
+    QPropertyAnimation *m_downMainAnimation = new QPropertyAnimation(m_topWidget, "pos");
     m_downMainAnimation->setDuration(200);
-    m_downMainAnimation->setStartValue(QPoint(0, 440));
+    m_downMainAnimation->setStartValue(QPoint(0, 200));
     m_downMainAnimation->setEndValue(QPoint(0, 600));
 
     QPropertyAnimation  *m_toTrans = new QPropertyAnimation(m_grayWidget, "opacity");
@@ -88,15 +92,15 @@ void MainWindow::initAnim()
     m_upGroup->addAnimation(m_downMainAnimation);
     m_upGroup->addAnimation(m_toTrans);
 
-    QPropertyAnimation *m_upGarAnimation = new QPropertyAnimation(m_topWidget, "pos");
+    QPropertyAnimation *m_upGarAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
     m_upGarAnimation->setDuration(200);
-    m_upGarAnimation->setStartValue(QPoint(0, -440));
+    m_upGarAnimation->setStartValue(QPoint(0, -200));
     m_upGarAnimation->setEndValue(QPoint(0, 0));
 
-    QPropertyAnimation *m_downGarAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
+    QPropertyAnimation *m_downGarAnimation = new QPropertyAnimation(m_topWidget, "pos");
     m_downGarAnimation->setDuration(200);
     m_downGarAnimation->setStartValue(QPoint(0, 600));
-    m_downGarAnimation->setEndValue(QPoint(0, 440));
+    m_downGarAnimation->setEndValue(QPoint(0, 200));
 
     QPropertyAnimation  *m_toGray = new QPropertyAnimation(m_grayWidget, "opacity");
     m_toGray->setDuration(200);
