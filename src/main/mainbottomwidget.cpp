@@ -108,7 +108,7 @@ void MainBottomWidget::initConnect()
     connect(m_firstWidget, SIGNAL(safeClicked()), this, SIGNAL(safeClicked()));
     connect(m_firstWidget, SIGNAL(cleanClicked()), this, SIGNAL(cleanClicked()));
     connect(m_firstWidget, SIGNAL(youhuaClicked()), this, SIGNAL(youhuaClicked()));
-    connect(m_firstWidget, SIGNAL(advtoolMoreClicked()), this, SIGNAL(advtoolMoreClicked()));
+//    connect(m_firstWidget, SIGNAL(advtoolMoreClicked()), this, SIGNAL(advtoolMoreClicked()));
 }
 
 //void MainBottomWidget::initTopTitleWidget()

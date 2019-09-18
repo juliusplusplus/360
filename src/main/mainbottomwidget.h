@@ -38,7 +38,7 @@ signals:
     void safeClicked();
     void cleanClicked();
     void youhuaClicked();
-    void advtoolMoreClicked();
+//    void advtoolMoreClicked();
 
     void playVideo();
     void showSkin();

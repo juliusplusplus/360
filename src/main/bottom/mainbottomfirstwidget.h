@@ -18,7 +18,7 @@ signals:
     void safeClicked();
     void cleanClicked();
     void youhuaClicked();
-    void advtoolMoreClicked();
+//    void advtoolMoreClicked();
 
 private:
     void initUI();
@@ -28,6 +28,7 @@ private:
     StaticButton *m_safeButton;
     StaticButton *m_cleanButton;
     StaticButton *m_youhuaButton;
+    StaticButton *m_webButton;
     StaticButton *m_advtoolMore;
 };
 
