@@ -58,7 +58,8 @@ SOURCES += main.cpp \
     src/clean/cleanwidget.cpp \
     src/common/safebuttonwidget.cpp \
     src/main/bottom/mainbottomfirstwidget.cpp \
-    src/optimize/youhuawidget.cpp
+    src/optimize/youhuawidget.cpp \
+    src/safe/customscan.cpp
 
 HEADERS  += \
     src/clean/common/cleanscanbottom.h \
@@ -108,7 +109,8 @@ HEADERS  += \
     src/common/myhelper.h \
     src/common/statictextbutton.h \
     src/common/wenliwidget.h \
-    src/safe/common/scanbuttonwidget.h
+    src/safe/common/scanbuttonwidget.h \
+    src/safe/customscan.h
 
 RESOURCES += \
     resource/360.qrc

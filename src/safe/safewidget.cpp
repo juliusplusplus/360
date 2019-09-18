@@ -16,6 +16,8 @@ SafeWidget::SafeWidget(QWidget *parent)
 
 void SafeWidget::initUI()
 {
+    m_customScan = new CustomScan;
+
     m_topBackWidget = new WenliBackWidget;
     m_stackStatusWidget = new StackStatusWidget;
     m_topBackWidget->insertWidget(m_stackStatusWidget);
@@ -39,13 +41,13 @@ void SafeWidget::initUI()
 void SafeWidget::initConnect()
 {
     connect(m_topBackWidget, SIGNAL(buttonClicked()), this, SIGNAL(goToMain()));
-    connect(m_scanBottomWidget,SIGNAL(quickClicked()),this,SLOT(debug()));
+    connect(m_scanBottomWidget,SIGNAL(quickClicked()),this,SLOT(quick_scan()));
     connect(m_scanBottomWidget,SIGNAL(customClicked()),this,SLOT(custom_scan()));
 }
 
-void SafeWidget::debug()
+void SafeWidget::quick_scan()
 {
-    qDebug()<<"clicked! QDebug ";
+    qDebug()<<"quick ! ";
 }
 
 void SafeWidget::custom_scan()
@@ -55,6 +57,6 @@ void SafeWidget::custom_scan()
 //    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
 //                                                      "/",
 //                                                      tr("Images (*.png *.xpm *.jpg)"));
-
+    m_customScan->exec();
 
 }

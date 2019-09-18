@@ -1,5 +1,6 @@
 #ifndef SAFEWIDGET_H
 #define SAFEWIDGET_H
+#include "customscan.h"
 
 #include <QWidget>
 
@@ -18,7 +19,7 @@ signals:
     void goToMain();
 
 private slots:
-    void debug();
+    void quick_scan();
     void custom_scan();
 
 private:
@@ -29,6 +30,7 @@ private:
     WenliBackWidget *m_topBackWidget;
     StackStatusWidget   *m_stackStatusWidget;
     SafeScanBottom  *m_scanBottomWidget;
+    CustomScan      *m_customScan;
 };
 
 #endif // SAFEWIDGET_H
