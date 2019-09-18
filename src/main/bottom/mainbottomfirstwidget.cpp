@@ -55,49 +55,16 @@ void MainBottomFirstWidget::initUI()
     QVBoxLayout *routerTextLayout = new QVBoxLayout;
     routerTextLayout->addWidget(routerTitle, 0, Qt::AlignRight);
     routerTextLayout->addWidget(routerDes, 0, Qt::AlignRight);
-    routerTextLayout->setContentsMargins(10, 10, 5, 15);
+    routerTextLayout->setContentsMargins(10, 20, 10, 10);
 
-    StaticButton *routerButton = new StaticButton(":/main/routerdefender");
-    QHBoxLayout *routerLayout = new QHBoxLayout;
-    routerLayout->addLayout(routerTextLayout);
-    routerLayout->addWidget(routerButton);
-
-    QStringList advIconList, advNameList;
-    advIconList << "360SoftManger" << "360JiShi" << "360MobileMgr" << "NetSpeed";
-    advNameList << QStringLiteral("软件管家") << QStringLiteral("人工服务") << QStringLiteral("手机助手") << QStringLiteral("宽带测速器") ;
-
-    QHBoxLayout *advLayout = new QHBoxLayout;
-    for(int i=0; i<advIconList.size(); i++)
-    {
-        BackgroundButton *backButton = new BackgroundButton;
-        backButton->setIconsInfo(":/main/" + advIconList.at(i), ":/main/all_tool_bk", 1);
-        backButton->setText(advNameList.at(i));
-        advLayout->addWidget(backButton);
-    }
-
-    m_advtoolMore = new StaticButton(":/main/advtool_more");
-    ButtonLabel *advLabel = new ButtonLabel;
-    advLabel->setStyleSheet("QLabel{color:blue;}");
-    advLabel->setText(QStringLiteral("更多"));
-
-    QVBoxLayout *moreLayout = new QVBoxLayout;
-    moreLayout->addStretch();
-    moreLayout->addWidget(m_advtoolMore, 0, Qt::AlignCenter);
-    moreLayout->addSpacing(5);
-    moreLayout->addWidget(advLabel, 0, Qt::AlignCenter);
-    moreLayout->addStretch();
-
-
-    advLayout->addLayout(moreLayout);
-
-    QVBoxLayout *rightLayout = new QVBoxLayout;
-    rightLayout->addLayout(routerLayout);
-    rightLayout->addLayout(advLayout);
-
+//    StaticButton *routerButton = new StaticButton(":/main/routerdefender");
+//    QHBoxLayout *routerLayout = new QHBoxLayout;
+//    routerLayout->addLayout(routerTextLayout);
+//    routerLayout->addWidget(routerButton)
     QHBoxLayout *mainLayout = new QHBoxLayout;
     mainLayout->addLayout(staticLayout);
     mainLayout->addStretch();
-    mainLayout->addLayout(rightLayout);
+    mainLayout->addLayout(routerTextLayout);
 
     this->setLayout(mainLayout);
 }
