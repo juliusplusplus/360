@@ -17,8 +17,13 @@ public:
 signals:
     void goToMain();
 
+private slots:
+    void debug();
+    void custom_scan();
+
 private:
     void initUI();
+    void initConnect();
 
 private:
     WenliBackWidget *m_topBackWidget;
