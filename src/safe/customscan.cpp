@@ -47,9 +47,16 @@ void CustomScan::initConnect()
 {
     connect(findButton,SIGNAL(clicked()),this,SLOT(findClicked()));
     connect(closeButton,SIGNAL(clicked()),this,SLOT(close()));
+    connect(lineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(enableFindBtn(const QString &)));
 }
 
 void CustomScan::findClicked()
 {
+//    QString text = lineEdit->text();
     qDebug()<<"find Clicked! ";
+}
+
+void CustomScan::enableFindBtn(const QString &text)
+{
+    findButton->setEnabled(!text.isEmpty());
 }

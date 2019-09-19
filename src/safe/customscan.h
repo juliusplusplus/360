@@ -18,6 +18,7 @@ signals:
 
 private slots:
     void findClicked();
+    void enableFindBtn(const QString &);
 
 private:
     void initUI();
