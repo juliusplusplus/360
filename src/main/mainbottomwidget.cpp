@@ -12,6 +12,8 @@
 
 #include <QLabel>
 #include <QStackedWidget>
+#include <QEvent>
+#include <QtDebug>
 
 MainBottomWidget::MainBottomWidget(QWidget *parent)
     : BaseStyleWidget(parent)
@@ -37,7 +39,16 @@ void MainBottomWidget::initUI()
     QLabel *textLabel = new QLabel;
     textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
     textLabel->adjustSize();
-    StaticButton *updateButton = new StaticButton(":/main/update_btn");
+    updateButton = new StaticButton(":/main/update_btn");
+    updateButton->installEventFilter(this);
+
+    suspendLabel = new QLabel();
+    QImage *img = new QImage;
+    img->load(":/main/logo");
+    suspendLabel->setPixmap(QPixmap::fromImage(*img));
+    suspendLabel->installEventFilter(this);
+
+
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->addWidget(logoLabel);
     hLayout->addWidget(textLabel);
@@ -141,3 +152,39 @@ void MainBottomWidget::goupdate()
 {
     m_sysUpdate->show();
 }
+
+bool MainBottomWidget::eventFilter(QObject *watched, QEvent *event)
+{
+//    this->setWindowFlags(this->windowFlags() | Qt::FramelessWindowHint);
+    if(updateButton == watched || suspendLabel == watched)
+    {
+        if(QEvent::Enter == event->type() )
+        {
+            if(suspendLabel->isHidden())
+            {
+                qDebug()<<"enter ";
+                suspendLabel->setWindowFlags(updateButton->windowFlags() | Qt::FramelessWindowHint);
+                suspendLabel->show();
+                QPoint oPoint = updateButton->mapToGlobal(QPoint(20, updateButton->height()));
+                suspendLabel->move(oPoint);
+                suspendLabel->raise();
+                return true;
+            }
+        }
+        else if (QEvent::Leave == event->type()) {
+            if(!suspendLabel->isHidden())
+            {
+                //这里原是判断鼠标是否在控件上但似乎判断不合适，干脆去掉，目前没发现问题。
+//                if(!updateButton->geometry().contains(this->mapFromGlobal(QCursor::pos()))
+//                        &&suspendLabel->geometry().contains(this->mapFromGlobal(QCursor::pos())) )
+//                {
+                    qDebug()<<"leave ";
+                    suspendLabel->hide();
+                    return true;
+//                }
+            }
+        }
+    }
+    return QWidget::eventFilter(watched,event);
+}
+

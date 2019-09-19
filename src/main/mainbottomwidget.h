@@ -3,6 +3,7 @@
 
 #include "../common/basestylewidget.h"
 #include "../common/sysupdate.h"
+#include "../common/staticbutton.h"
 #include <QWidget>
 
 class QStackedLayout;
@@ -23,6 +24,7 @@ class MainBottomWidget : public BaseStyleWidget
 
 public:
     explicit MainBottomWidget(QWidget *parent = 0);
+    bool eventFilter(QObject *watched, QEvent *event);
 
 public slots:
     void goExamine();
@@ -63,6 +65,8 @@ private:
     QWidget                 *m_titleWidget;
     QStackedWidget          *m_titleStacked;
     SysUpdate               *m_sysUpdate;
+    StaticButton            *updateButton;
+    QLabel            *suspendLabel;
 };
 
 #endif // MAINBOTTOMWIDGET_H

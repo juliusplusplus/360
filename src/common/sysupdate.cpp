@@ -8,12 +8,9 @@ SysUpdate::SysUpdate(QWidget *parent)
     : QWidget(parent)
 {
     this->setFixedSize(340, 420);
-    //设置标题栏隐藏
     this->setWindowTitle(tr("安恒主机卫士"));
     this->setWindowIcon(QIcon(":/main/AboutLogo"));
-//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
 
-//    wait_dialog = new WaitDialog();
     m_update_wait = new update_wait();
     icon_label = new QLabel();
     info_label = new QLabel();
@@ -21,12 +18,6 @@ SysUpdate::SysUpdate(QWidget *parent)
     virus_label = new QLabel();
     mummy_label = new QLabel();
     wait_button = new QPushButton();
-
-//    QPixmap title_pixmap(":/main/AboutLogo");
-//    title_icon_label->setPixmap(title_pixmap);
-//    title_icon_label->setFixedSize(16, 16);
-//    title_icon_label->setScaledContents(true);
-//    close_button->setIcon(QPixmap(":/main/sys_close"));
 
     QPixmap pixmap(":/main/AboutLogo");
     icon_label->setPixmap(pixmap);
