@@ -33,15 +33,11 @@ SOURCES += main.cpp \
     src/common/basestylewidget.cpp \
     src/common/animbuttonwidget.cpp \
     src/common/animbuttongroupwidget.cpp \
-    src/main/bottom/mainexaminewidget.cpp \
     src/main/common/videowidget.cpp \
     src/main/common/scorewidget.cpp \
     src/main/common/opacitywidget.cpp \
     src/main/common/buttonlabel.cpp \
     src/main/common/backgroundbutton.cpp \
-    src/main/top/userwidget.cpp \
-    src/main/top/topbottomwidget.cpp \
-    src/main/top/mainscorewidget.cpp \
     src/main/mainwindow.cpp \
     src/main/maintopwidget.cpp \
     src/optimize/common/youhuascanbottom.cpp \
@@ -61,7 +57,6 @@ SOURCES += main.cpp \
     src/common/sysupdate.cpp \
     src/common/update_wait.cpp \
     src/main/maintmpwidget.cpp \
-    src/main/bottom/maintmpfirstwidget.cpp \
     src/main/top/mainexaminewidget.cpp \
     src/main/top/maintmpfirstwidget.cpp \
     src/main/bottom/mainscorewidget.cpp \
@@ -86,16 +81,12 @@ HEADERS  += \
     src/common/dynamicbutton.h \
     src/common/common.h \
     src/common/animbuttongroupwidget.h \
-    src/main/bottom/mainexaminewidget.h \
     src/main/common/videowidget.h \
     src/main/common/shadowwidget.h \
     src/main/common/scorewidget.h \
     src/main/common/opacitywidget.h \
     src/main/common/buttonlabel.h \
     src/main/common/backgroundbutton.h \
-    src/main/top/userwidget.h \
-    src/main/top/topbottomwidget.h \
-    src/main/top/mainscorewidget.h \
     src/main/mainwindow.h \
     src/main/maintopwidget.h \
     src/optimize/common/youhuascanbottom.h \
@@ -119,7 +110,6 @@ HEADERS  += \
     src/common/sysupdate.h \
     src/common/update_wait.h \
     src/main/maintmpwidget.h \
-    src/main/bottom/maintmpfirstwidget.h \
     src/main/top/mainexaminewidget.h \
     src/main/top/maintmpfirstwidget.h \
     src/main/bottom/mainscorewidget.h \
