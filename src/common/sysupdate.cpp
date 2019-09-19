@@ -14,7 +14,7 @@ SysUpdate::SysUpdate(QWidget *parent)
 //    this->setWindowFlags(Qt::FramelessWindowHint | Qt::Widget);
 
 //    wait_dialog = new WaitDialog();
-
+    m_update_wait = new update_wait();
     icon_label = new QLabel();
     info_label = new QLabel();
     version_label = new QLabel();
@@ -128,5 +128,5 @@ void SysUpdate::wait_clicked()
 //    move(this->mapFromGlobal(q));
 //    QPoint wait_pos = event->globalPos();
 //    move(wait_pos);
-//    wait_dialog->exec();
+    m_update_wait->exec();
 }

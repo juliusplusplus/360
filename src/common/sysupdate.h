@@ -1,6 +1,7 @@
 #ifndef SYSUPDATE_H
 #define SYSUPDATE_H
 
+#include "update_wait.h"
 #include <QWidget>
 class QLabel;
 class QPushButton;
@@ -31,7 +32,7 @@ private:
     QLabel *mummy_label;      //备用木马库
     QPushButton *wait_button;   //等待按钮
 
-//    WaitDialog *wait_dialog;    //等待界面
+    update_wait *m_update_wait;    //等待界面
 
 };
 

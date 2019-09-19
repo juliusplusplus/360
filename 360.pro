@@ -60,7 +60,8 @@ SOURCES += main.cpp \
     src/main/bottom/mainbottomfirstwidget.cpp \
     src/optimize/youhuawidget.cpp \
     src/safe/customscan.cpp \
-    src/common/sysupdate.cpp
+    src/common/sysupdate.cpp \
+    src/common/update_wait.cpp
 
 HEADERS  += \
     src/clean/common/cleanscanbottom.h \
@@ -112,7 +113,8 @@ HEADERS  += \
     src/common/wenliwidget.h \
     src/safe/common/scanbuttonwidget.h \
     src/safe/customscan.h \
-    src/common/sysupdate.h
+    src/common/sysupdate.h \
+    src/common/update_wait.h
 
 RESOURCES += \
     resource/360.qrc
