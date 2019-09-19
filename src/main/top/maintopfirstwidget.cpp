@@ -1,4 +1,4 @@
-#include "maintmpfirstWidget.h"
+#include "maintopfirstWidget.h"
 #include "../common/buttonlabel.h"
 #include "../../common/staticbutton.h"
 #include "../common/backgroundbutton.h"
@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-MainTmpFirstWidget::MainTmpFirstWidget(QWidget *parent)
+MainTopFirstWidget::MainTopFirstWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
     this->setStyleSheet("QWidget#firstWidget{background:white;}");
@@ -16,7 +16,7 @@ MainTmpFirstWidget::MainTmpFirstWidget(QWidget *parent)
     this->initConnect();
 }
 
-void MainTmpFirstWidget::initUI()
+void MainTopFirstWidget::initUI()
 {
     m_safeButton = new StaticButton(":/main/safe_check");
     QLabel *safeLabel = new QLabel(QStringLiteral("病毒查杀"));
@@ -80,7 +80,7 @@ void MainTmpFirstWidget::initUI()
     this->setLayout(mainLayout);
 }
 
-void MainTmpFirstWidget::initConnect()
+void MainTopFirstWidget::initConnect()
 {
     connect(m_safeButton, SIGNAL(buttonClicked()), this, SIGNAL(safeClicked()));
     connect(m_cleanButton, SIGNAL(buttonClicked()), this, SIGNAL(cleanClicked()));

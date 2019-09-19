@@ -1,65 +1,71 @@
-#ifndef MAINTOPWIDGET_H
-#define MAINTOPWIDGET_H
+#ifndef MainTOPWidget_H
+#define MainTOPWidget_H
 
 #include "../common/basestylewidget.h"
-
+#include "../common/sysupdate.h"
+#include "../common/staticbutton.h"
 #include <QWidget>
-#include <QPixmap>
 
-#define MAIN_TOP_WIDTH      900
-#define MAIN_TOP_HEIGHT     440
+class QStackedLayout;
+class MainExamineWidget;
+class QPropertyAnimation;
+class MainTopFirstWidget;
 
+class QStackedWidget;
 class UserWidget;
 class WenliWidget;
-class QStackedWidget;
 class MainScoreWidget;
 class TopBottomWidget;
-class QPropertyAnimation;
 class QParallelAnimationGroup;
 
-class MainTopWidget : public BaseStyleWidget
+class MaintopWidget : public BaseStyleWidget
 {
     Q_OBJECT
+
 public:
-    explicit MainTopWidget(QWidget *parent = 0);
+    explicit MaintopWidget(QWidget *parent = 0);
+    bool eventFilter(QObject *watched, QEvent *event);
 
 public slots:
-    void setNums(int num);
+    void goExamine();
+    void goMain();
+
+private slots:
+    void goExamineFinished();
+    void goMainFinished();
+    void goupdate();
+    void returnMain();
 
 signals:
-    void playVideo();
+    void safeClicked();
+    void cleanClicked();
+    void youhuaClicked();
+//    void advtoolMoreClicked();
+
     void showSkin();
     void showMenu();
     void showMin();
     void closeWidget();
-    void goExamine();
-    void goMain();
-
-protected:
-    void resizeEvent(QResizeEvent *);
-
-private slots:
-    void examineClicked();
-    void viewClicked();
-    void returnMain();
-    void returnAnimationFinished();
 
 private:
     void initUI();
-    void initTopTitleWidget();
+    void initAnimation();
     void initConnect();
-    void initAnimations();
-    void updateSizeAndPos();
+    void initTopTitleWidget();
 
 private:
+    QStackedLayout        *m_stackedWidget;
+    MainExamineWidget     *m_examineWidget;
+    QPropertyAnimation    *m_examineAnimation;
+    QPropertyAnimation    *m_returnAnimation;
+    MainTopFirstWidget      *m_firstWidget;
+
+
     QWidget                 *m_titleWidget;
-    UserWidget              *m_userWidget;
-    WenliWidget             *m_backgroundWidget;
     QStackedWidget          *m_titleStacked;
-    MainScoreWidget         *m_scoreWidget;
-    TopBottomWidget         *m_bottomWidget;
-    QParallelAnimationGroup *m_examineGroupAnimation;
-    QParallelAnimationGroup *m_returnGroupAnimation;
+    SysUpdate               *m_sysUpdate;
+    StaticButton            *updateButton;
+    QLabel            *suspendLabel;
 };
 
-#endif // MAINTOPWIDGET_H
+#endif // MainTOPWidget_H

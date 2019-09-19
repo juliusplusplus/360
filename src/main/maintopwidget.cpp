@@ -1,147 +1,189 @@
-#include "maintopwidget.h"
-#include "bottom/userwidget.h"
-#include "bottom/topbottomwidget.h"
-#include "bottom/mainscorewidget.h"
-#include "../common/wenliwidget.h"
+#include "maintopWidget.h"
+#include "top/mainexaminewidget.h"
+#include "top/maintopfirstwidget.h"
+
 #include "../common/staticbutton.h"
 #include "../common/sysbuttongroup.h"
 
-#include <QLabel>
 #include <QPainter>
-#include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QStackedWidget>
+#include <QStackedLayout>
 #include <QPropertyAnimation>
-#include <QParallelAnimationGroup>
 
-MainTopWidget::MainTopWidget(QWidget *parent)
+#include <QLabel>
+#include <QStackedWidget>
+#include <QEvent>
+#include <QtDebug>
+
+MaintopWidget::MaintopWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
+
+    this->setStyleSheet("QWidget#mainWidget{background:blue;}");
+    this->setObjectName("mainWidget");
     this->initUI();
-    this->initAnimations();
+    this->initAnimation();
     this->initConnect();
 }
 
-void MainTopWidget::initAnimations()
+void MaintopWidget::initUI()
 {
-    QRect mainRect(0, 0, width(), 240);
-    QRect origRect = rect();
-    QPoint origPoint = m_scoreWidget->pos();
-    QPoint toPoint(0, m_userWidget->height() + 10);
-//    QPoint toPoint(0, m_titleWidget->height() + 10);
+    m_sysUpdate = new SysUpdate;
 
-    QPropertyAnimation *mainExamineAnim = new QPropertyAnimation(this, "geometry");
-    mainExamineAnim->setDuration(200);
-    mainExamineAnim->setStartValue(origRect);
-    mainExamineAnim->setEndValue(mainRect);
+    this->setGeometry(0, 0, 900, 200);
+//    this->setGeometry(0, 440, 900, 160);
 
-    QPropertyAnimation *scoreExamineAnim = new QPropertyAnimation(m_scoreWidget, "pos");
-    scoreExamineAnim->setDuration(200);
-    scoreExamineAnim->setStartValue(origPoint);
-    scoreExamineAnim->setEndValue(toPoint);
+    //标题
+    QLabel *logoLabel = new QLabel;
+    logoLabel->setPixmap(QPixmap(":/main/logo"));
+    QLabel *textLabel = new QLabel;
+    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
+    textLabel->adjustSize();
+    updateButton = new StaticButton(":/main/update_btn");
+    updateButton->installEventFilter(this);
 
-    m_examineGroupAnimation = new QParallelAnimationGroup(this);
-    m_examineGroupAnimation->addAnimation(mainExamineAnim);
-    m_examineGroupAnimation->addAnimation(scoreExamineAnim);
+    suspendLabel = new QLabel();
+    QImage *img = new QImage;
+    img->load(":/main/logo");
+    suspendLabel->setPixmap(QPixmap::fromImage(*img));
+    suspendLabel->installEventFilter(this);
 
-    QPropertyAnimation *mainReturnAnim = new QPropertyAnimation(this, "geometry");
-    mainReturnAnim->setDuration(200);
-    mainReturnAnim->setStartValue(mainRect);
-    mainReturnAnim->setEndValue(origRect);
 
-    QPropertyAnimation *scoreReturnAnim = new QPropertyAnimation(m_scoreWidget, "pos");
-    scoreReturnAnim->setDuration(200);
-    scoreReturnAnim->setStartValue(toPoint);
-    scoreReturnAnim->setEndValue(origPoint);
+    QHBoxLayout *hLayout = new QHBoxLayout;
+    hLayout->addWidget(logoLabel);
+    hLayout->addWidget(textLabel);
+    hLayout->addWidget(updateButton);
 
-    m_returnGroupAnimation = new QParallelAnimationGroup(this);
-    m_returnGroupAnimation->addAnimation(mainReturnAnim);
-    m_returnGroupAnimation->addAnimation(scoreReturnAnim);
+    QWidget *title = new QWidget;
+//    title->setAttribute(Qt::WA_TranslucentBackground);
+    title->setLayout(hLayout);
+
+    StaticButton *returnButton = new StaticButton(":/main/return");
+    connect(updateButton,SIGNAL(buttonClicked()),this,SLOT(goupdate()));
+    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(goMainFinished()));
+
+    m_titleStacked = new QStackedWidget;
+    m_titleStacked->addWidget(title);
+    m_titleStacked->addWidget(returnButton);
+    m_titleStacked->setFixedHeight(returnButton->height());
+
+    SysButtonGroup *buttonGroup = new SysButtonGroup;
+    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
+    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
+    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
+    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
+
+    QHBoxLayout *titleLayout = new QHBoxLayout;
+    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
+    titleLayout->addStretch();
+    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
+    titleLayout->setContentsMargins(0, 0, 0, 0);
+
+    //切换
+    m_stackedWidget = new QStackedLayout;
+    m_firstWidget = new MainTopFirstWidget;
+    BaseStyleWidget *whiteWidget = new BaseStyleWidget;
+    whiteWidget->setStyleSheet("background:white;");
+    m_examineWidget = new MainExamineWidget;
+
+    m_stackedWidget->addWidget(m_firstWidget);
+    m_stackedWidget->addWidget(whiteWidget);
+    m_stackedWidget->addWidget(m_examineWidget);
+
+    QVBoxLayout *t_layout = new QVBoxLayout;
+    t_layout->addLayout(titleLayout);
+    t_layout->setContentsMargins(0, 0, 0, 0);
+    t_layout->addLayout(m_stackedWidget);
+    this->setLayout(t_layout);
+}
+
+void MaintopWidget::initAnimation()
+{
+    QRect mainRect(0, 240, 900, 360);
+    QRect origRect(0, 440, 900, 160);
+    m_examineAnimation = new QPropertyAnimation(this, "geometry");
+    m_examineAnimation->setDuration(200);
+    m_examineAnimation->setStartValue(origRect);
+    m_examineAnimation->setEndValue(mainRect);
+
+
+    m_returnAnimation = new QPropertyAnimation(this, "geometry");
+    m_returnAnimation->setDuration(200);
+    m_returnAnimation->setStartValue(mainRect);
+    m_returnAnimation->setEndValue(origRect);
+
+}
+
+void MaintopWidget::initConnect()
+{
+    connect(m_examineAnimation, SIGNAL(finished()), this, SLOT(goExamineFinished()));
+    connect(m_returnAnimation, SIGNAL(finished()), this, SLOT(goMainFinished()));
+    connect(m_firstWidget, SIGNAL(safeClicked()), this, SIGNAL(safeClicked()));
+    connect(m_firstWidget, SIGNAL(cleanClicked()), this, SIGNAL(cleanClicked()));
+    connect(m_firstWidget, SIGNAL(youhuaClicked()), this, SIGNAL(youhuaClicked()));
+//    connect(m_firstWidget, SIGNAL(advtoolMoreClicked()), this, SIGNAL(advtoolMoreClicked()));
 }
 
 
-void MainTopWidget::initUI()
+void MaintopWidget::goExamine()
 {
-    //this->setFixedSize(m_wenliPix.size());
-    this->setGeometry(0, 200, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
-//    this->setGeometry(0, 0, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
-    m_backgroundWidget = new WenliWidget(this);
-    m_backgroundWidget->setGeometry(rect());
-    m_backgroundWidget->lower();
-//    this->initTopTitleWidget();
-
-    m_userWidget = new  UserWidget(this);
-    m_userWidget->setFixedWidth(width());
-
-    m_scoreWidget = new MainScoreWidget(this);
-    m_scoreWidget->setButtonStatus(SCORE_NO_BUTTON);
-    m_scoreWidget->setScoreStatus(SCORE_QUESTION);
-    m_scoreWidget->setTextInfo(QStringLiteral("建议体检"), QStringLiteral("建议每天进行体检"));
-    m_scoreWidget->setFixedWidth(width());
-
-    m_bottomWidget = new TopBottomWidget(this);
-    m_bottomWidget->setFixedWidth(width());
-    updateSizeAndPos();
+    m_examineAnimation->start();
+    m_stackedWidget->setCurrentIndex(1);
 }
 
-void MainTopWidget::initConnect()
+void MaintopWidget::goMain()
 {
-    connect(m_bottomWidget, SIGNAL(examineClicked()), this, SLOT(examineClicked()));
-    connect(m_bottomWidget, SIGNAL(viewClicked()), this, SLOT(viewClicked()));
-    connect(m_returnGroupAnimation, SIGNAL(finished()), this, SLOT(returnAnimationFinished()));
+    m_returnAnimation->start();
+    m_stackedWidget->setCurrentIndex(1);
 }
 
-void MainTopWidget::setNums(int num)
+void MaintopWidget::goExamineFinished()
 {
-    m_backgroundWidget->setNums(num);
+    m_stackedWidget->setCurrentIndex(2);
 }
 
-void MainTopWidget::updateSizeAndPos()
+void MaintopWidget::goMainFinished()
 {
-//    m_userWidget->move(0, m_titleWidget->y() + m_titleWidget->height() + 10);
-    m_scoreWidget->move(0, m_userWidget->y() + m_userWidget->height() + 10);
-    m_bottomWidget->move(0, m_scoreWidget->y() + m_scoreWidget->height() + 10);
+    m_stackedWidget->setCurrentIndex(0);
 }
 
-void MainTopWidget::returnAnimationFinished()
+void MaintopWidget::goupdate()
 {
-    m_userWidget->show();
-    m_bottomWidget->show();
+    m_sysUpdate->show();
 }
 
-void MainTopWidget::returnMain()
+bool MaintopWidget::eventFilter(QObject *watched, QEvent *event)
 {
-    m_titleStacked->setCurrentIndex(0);
-    m_bottomWidget->setStackedButton(0);
-    m_scoreWidget->setButtonStatus(SCORE_NO_BUTTON);
-    m_returnGroupAnimation->start();
-    emit goMain();
-}
-
-void MainTopWidget::examineClicked()
-{
-    m_titleStacked->setCurrentIndex(1);
-    m_userWidget->hide();
-    m_bottomWidget->hide();
-    m_scoreWidget->setButtonStatus(SCORE_FIX_BUTTON);
-    m_scoreWidget->setNums(85);
-    this->setNums(85);
-    m_examineGroupAnimation->start();
-    emit goExamine();
-}
-
-void MainTopWidget::viewClicked()
-{
-    m_titleStacked->setCurrentIndex(1);
-    m_userWidget->hide();
-    m_bottomWidget->hide();
-    m_examineGroupAnimation->start();
-    emit goExamine();
-}
-
-
-void MainTopWidget::resizeEvent(QResizeEvent *)
-{
-    //updateSizeAndPos();
+//    this->setWindowFlags(this->windowFlags() | Qt::FramelessWindowHint);
+    if(updateButton == watched || suspendLabel == watched)
+    {
+        if(QEvent::Enter == event->type() )
+        {
+            if(suspendLabel->isHidden())
+            {
+                qDebug()<<"enter ";
+                suspendLabel->setWindowFlags(updateButton->windowFlags() | Qt::FramelessWindowHint);
+                suspendLabel->show();
+                QPoint oPoint = updateButton->mapToGlobal(QPoint(20, updateButton->height()));
+                suspendLabel->move(oPoint);
+                suspendLabel->raise();
+                return true;
+            }
+        }
+        else if (QEvent::Leave == event->type()) {
+            if(!suspendLabel->isHidden())
+            {
+                //这里原是判断鼠标是否在控件上但似乎判断不合适，干脆去掉，目前没发现问题。
+//                if(!updateButton->geometry().contains(this->mapFromGlobal(QCursor::pos()))
+//                        &&suspendLabel->geometry().contains(this->mapFromGlobal(QCursor::pos())) )
+//                {
+                    qDebug()<<"leave ";
+                    suspendLabel->hide();
+                    return true;
+//                }
+            }
+        }
+    }
+    return QWidget::eventFilter(watched,event);
 }
 

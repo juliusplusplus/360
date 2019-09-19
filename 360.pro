@@ -39,7 +39,6 @@ SOURCES += main.cpp \
     src/main/common/buttonlabel.cpp \
     src/main/common/backgroundbutton.cpp \
     src/main/mainwindow.cpp \
-    src/main/maintopwidget.cpp \
     src/optimize/common/youhuascanbottom.cpp \
     src/safe/safewidget.cpp \
     src/safe/safetopwidget.cpp \
@@ -56,12 +55,13 @@ SOURCES += main.cpp \
     src/safe/customscan.cpp \
     src/common/sysupdate.cpp \
     src/common/update_wait.cpp \
-    src/main/maintmpwidget.cpp \
     src/main/top/mainexaminewidget.cpp \
-    src/main/top/maintmpfirstwidget.cpp \
     src/main/bottom/mainscorewidget.cpp \
     src/main/bottom/topbottomwidget.cpp \
-    src/main/bottom/userwidget.cpp
+    src/main/bottom/userwidget.cpp \
+    src/main/mainbottomwidget.cpp \
+    src/main/maintopwidget.cpp \
+    src/main/top/maintopfirstwidget.cpp
 
 HEADERS  += \
     src/clean/common/cleanscanbottom.h \
@@ -88,7 +88,6 @@ HEADERS  += \
     src/main/common/buttonlabel.h \
     src/main/common/backgroundbutton.h \
     src/main/mainwindow.h \
-    src/main/maintopwidget.h \
     src/optimize/common/youhuascanbottom.h \
     src/optimize/youhuawidget.h \
     src/safe/safewidget.h \
@@ -109,12 +108,13 @@ HEADERS  += \
     src/safe/customscan.h \
     src/common/sysupdate.h \
     src/common/update_wait.h \
-    src/main/maintmpwidget.h \
     src/main/top/mainexaminewidget.h \
-    src/main/top/maintmpfirstwidget.h \
     src/main/bottom/mainscorewidget.h \
     src/main/bottom/topbottomwidget.h \
-    src/main/bottom/userwidget.h
+    src/main/bottom/userwidget.h \
+    src/main/mainbottomwidget.h \
+    src/main/maintopwidget.h \
+    src/main/top/maintopfirstwidget.h
 
 RESOURCES += \
     resource/360.qrc

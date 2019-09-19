@@ -8,11 +8,11 @@ class SafeWidget;
 class CleanWidget;
 class VideoWidget;
 class YouhuaWidget;
-class MainTopWidget;
+class MainBottomWidget;
 class OpacityWidget;
 class QStackedWidget;
 class BaseStyleWidget;
-class MaintmpWidget;
+class MaintopWidget;
 class QParallelAnimationGroup;
 
 class MainWindow : public ShadowWidget
@@ -32,7 +32,6 @@ private slots:
     void showMenu();
     void goToSafe();
     void goToMain();
-    void playVideo();
     void goToClean();
     void goToYouhua();
     void closeWidget();
@@ -43,10 +42,10 @@ private:
     VideoWidget             *m_video;
     CleanWidget             *m_cleanWidget;
     YouhuaWidget            *m_youhuaWidget;
-    MainTopWidget           *m_topWidget;
+    MainBottomWidget        *m_bottomWidget;
     OpacityWidget           *m_grayWidget;
     QStackedWidget          *m_stackWidget;
-    MaintmpWidget           *m_tmpWidget;
+    MaintopWidget           *m_topWidget;
     QParallelAnimationGroup *m_upGroup;
     QParallelAnimationGroup *m_downGroup;
 };

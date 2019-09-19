@@ -31,7 +31,6 @@ void WenliBackWidget::initUI()
 
 void WenliBackWidget::initConnect()
 {
-    connect(m_groupButton, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
     connect(m_groupButton, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
     connect(m_groupButton, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
     connect(m_groupButton, SIGNAL(showMin()), this, SIGNAL(showMin()));
