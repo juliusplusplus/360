@@ -7,7 +7,7 @@ SysButtonGroup::SysButtonGroup(QWidget *parent)
     : QWidget(parent)
 {
     QHBoxLayout *hLayout = new QHBoxLayout;
-    StaticButton *playButton = new StaticButton(":/main/playvideo");
+    StaticButton *playButton = new StaticButton(":/main/0playvideo");
     connect(playButton, SIGNAL(buttonClicked()), this, SIGNAL(playVideo()));
 
     StaticButton *skinButton = new StaticButton(":/main/skin");

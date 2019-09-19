@@ -2,7 +2,7 @@
 #define MAINBOTTOMWIDGET_H
 
 #include "../common/basestylewidget.h"
-
+#include "../common/sysupdate.h"
 #include <QWidget>
 
 class QStackedLayout;
@@ -31,7 +31,7 @@ public slots:
 private slots:
     void goExamineFinished();
     void goMainFinished();
-
+    void goupdate();
     void returnMain();
 
 signals:
@@ -62,6 +62,7 @@ private:
 
     QWidget                 *m_titleWidget;
     QStackedWidget          *m_titleStacked;
+    SysUpdate               *m_sysUpdate;
 };
 
 #endif // MAINBOTTOMWIDGET_H

@@ -84,53 +84,6 @@ void MainTopWidget::initUI()
     updateSizeAndPos();
 }
 
-void MainTopWidget::initTopTitleWidget()
-{
-    m_titleWidget = new QWidget(this);
-    m_titleWidget->setAttribute(Qt::WA_TranslucentBackground);
-    m_titleWidget->setFixedWidth(width());
-    m_titleWidget->move(0, 0);
-
-    QLabel *logoLabel = new QLabel;
-    logoLabel->setPixmap(QPixmap(":/main/logo"));
-    QLabel *textLabel = new QLabel;
-    textLabel->setText(QStringLiteral("360安全卫士 10.0 Beta"));
-    textLabel->adjustSize();
-    StaticButton *updateButton = new StaticButton(":/main/update_btn");
-    QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->addWidget(logoLabel);
-    hLayout->addWidget(textLabel);
-    hLayout->addWidget(updateButton);
-
-    QWidget *title = new QWidget;
-    title->setAttribute(Qt::WA_TranslucentBackground);
-    title->setLayout(hLayout);
-
-    StaticButton *returnButton = new StaticButton(":/main/return");
-    connect(returnButton, SIGNAL(buttonClicked()), this, SLOT(returnMain()));
-
-    m_titleStacked = new QStackedWidget;
-    m_titleStacked->addWidget(title);
-    m_titleStacked->addWidget(returnButton);
-    m_titleStacked->setFixedHeight(returnButton->height());
-
-    SysButtonGroup *buttonGroup = new SysButtonGroup;
-    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
-    connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
-    connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
-    connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
-    connect(buttonGroup, SIGNAL(closeWidget()), this, SIGNAL(closeWidget()));
-
-    QHBoxLayout *titleLayout = new QHBoxLayout;
-    titleLayout->addWidget(m_titleStacked, 0, Qt::AlignLeft | Qt::AlignTop);
-    titleLayout->addStretch();
-    titleLayout->addWidget(buttonGroup, 0, Qt::AlignRight | Qt::AlignTop);
-    titleLayout->setContentsMargins(0, 0, 0, 0);
-
-    m_titleWidget->setLayout(titleLayout);
-
-}
-
 void MainTopWidget::initConnect()
 {
     connect(m_bottomWidget, SIGNAL(examineClicked()), this, SLOT(examineClicked()));
