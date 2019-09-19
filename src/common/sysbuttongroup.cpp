@@ -7,8 +7,6 @@ SysButtonGroup::SysButtonGroup(QWidget *parent)
     : QWidget(parent)
 {
     QHBoxLayout *hLayout = new QHBoxLayout;
-    StaticButton *playButton = new StaticButton(":/main/0playvideo");
-    connect(playButton, SIGNAL(buttonClicked()), this, SIGNAL(playVideo()));
 
     StaticButton *skinButton = new StaticButton(":/main/skin");
     connect(skinButton, SIGNAL(buttonClicked()), this, SIGNAL(showSkin()));
@@ -22,7 +20,6 @@ SysButtonGroup::SysButtonGroup(QWidget *parent)
     StaticButton *closeButton = new StaticButton(":/main/sys_close");
     connect(closeButton, SIGNAL(buttonClicked()), this, SIGNAL(closeWidget()));
 
-    hLayout->addWidget(playButton);
     hLayout->addWidget(skinButton);
     hLayout->addWidget(menuButton);
     hLayout->addWidget(minButton);

@@ -1,6 +1,6 @@
-#include "mainbottomwidget.h"
-#include "bottom/mainexaminewidget.h"
-#include "bottom/mainbottomfirstwidget.h"
+#include "maintmpWidget.h"
+#include "top/mainexaminewidget.h"
+#include "top/maintmpfirstwidget.h"
 
 #include "../common/staticbutton.h"
 #include "../common/sysbuttongroup.h"
@@ -15,7 +15,7 @@
 #include <QEvent>
 #include <QtDebug>
 
-MainBottomWidget::MainBottomWidget(QWidget *parent)
+MaintmpWidget::MaintmpWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
 
@@ -26,7 +26,7 @@ MainBottomWidget::MainBottomWidget(QWidget *parent)
     this->initConnect();
 }
 
-void MainBottomWidget::initUI()
+void MaintmpWidget::initUI()
 {
     m_sysUpdate = new SysUpdate;
 
@@ -68,7 +68,6 @@ void MainBottomWidget::initUI()
     m_titleStacked->setFixedHeight(returnButton->height());
 
     SysButtonGroup *buttonGroup = new SysButtonGroup;
-    connect(buttonGroup, SIGNAL(playVideo()), this, SIGNAL(playVideo()));
     connect(buttonGroup, SIGNAL(showSkin()), this, SIGNAL(showSkin()));
     connect(buttonGroup, SIGNAL(showMenu()), this, SIGNAL(showMenu()));
     connect(buttonGroup, SIGNAL(showMin()), this, SIGNAL(showMin()));
@@ -82,7 +81,7 @@ void MainBottomWidget::initUI()
 
     //切换
     m_stackedWidget = new QStackedLayout;
-    m_firstWidget = new MainBottomFirstWidget;
+    m_firstWidget = new MainTmpFirstWidget;
     BaseStyleWidget *whiteWidget = new BaseStyleWidget;
     whiteWidget->setStyleSheet("background:white;");
     m_examineWidget = new MainExamineWidget;
@@ -98,7 +97,7 @@ void MainBottomWidget::initUI()
     this->setLayout(t_layout);
 }
 
-void MainBottomWidget::initAnimation()
+void MaintmpWidget::initAnimation()
 {
     QRect mainRect(0, 240, 900, 360);
     QRect origRect(0, 440, 900, 160);
@@ -115,7 +114,7 @@ void MainBottomWidget::initAnimation()
 
 }
 
-void MainBottomWidget::initConnect()
+void MaintmpWidget::initConnect()
 {
     connect(m_examineAnimation, SIGNAL(finished()), this, SLOT(goExamineFinished()));
     connect(m_returnAnimation, SIGNAL(finished()), this, SLOT(goMainFinished()));
@@ -126,34 +125,34 @@ void MainBottomWidget::initConnect()
 }
 
 
-void MainBottomWidget::goExamine()
+void MaintmpWidget::goExamine()
 {
     m_examineAnimation->start();
     m_stackedWidget->setCurrentIndex(1);
 }
 
-void MainBottomWidget::goMain()
+void MaintmpWidget::goMain()
 {
     m_returnAnimation->start();
     m_stackedWidget->setCurrentIndex(1);
 }
 
-void MainBottomWidget::goExamineFinished()
+void MaintmpWidget::goExamineFinished()
 {
     m_stackedWidget->setCurrentIndex(2);
 }
 
-void MainBottomWidget::goMainFinished()
+void MaintmpWidget::goMainFinished()
 {
     m_stackedWidget->setCurrentIndex(0);
 }
 
-void MainBottomWidget::goupdate()
+void MaintmpWidget::goupdate()
 {
     m_sysUpdate->show();
 }
 
-bool MainBottomWidget::eventFilter(QObject *watched, QEvent *event)
+bool MaintmpWidget::eventFilter(QObject *watched, QEvent *event)
 {
 //    this->setWindowFlags(this->windowFlags() | Qt::FramelessWindowHint);
     if(updateButton == watched || suspendLabel == watched)

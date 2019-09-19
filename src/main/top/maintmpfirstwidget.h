@@ -1,5 +1,5 @@
-#ifndef MAINBOTTOMFIRSTWIDGET_H
-#define MAINBOTTOMFIRSTWIDGET_H
+#ifndef MainTmpFirstWidget_H
+#define MainTmpFirstWidget_H
 
 #include "../../common/basestylewidget.h"
 
@@ -8,11 +8,11 @@
 class StaticButton;
 //class BackgroundButton;
 
-class MainBottomFirstWidget : public BaseStyleWidget
+class MainTmpFirstWidget : public BaseStyleWidget
 {
     Q_OBJECT
 public:
-    explicit MainBottomFirstWidget(QWidget *parent = 0);
+    explicit MainTmpFirstWidget(QWidget *parent = 0);
 
 signals:
     void safeClicked();
@@ -32,4 +32,4 @@ private:
     StaticButton *m_advtoolMore;
 };
 
-#endif // MAINBOTTOMFIRSTWIDGET_H
+#endif // MainTmpFirstWidget_H

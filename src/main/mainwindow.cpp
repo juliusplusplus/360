@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "maintopwidget.h"
-#include "mainbottomwidget.h"
+#include "maintmpwidget.h"
 #include "../safe/safewidget.h"
 #include "common/videowidget.h"
 #include "../clean/cleanwidget.h"
@@ -39,7 +39,7 @@ void MainWindow::initUI()
     m_grayWidget->setColor(QColor(Qt::gray));
 
     m_topWidget = new MainTopWidget(this);
-    m_bottomWidget = new MainBottomWidget(this);
+    m_tmpWidget = new MaintmpWidget(this);
 
     m_safeWidget = new SafeWidget(this);
     m_stackWidget->addWidget(m_safeWidget);
@@ -51,8 +51,8 @@ void MainWindow::initUI()
 
 void MainWindow::initConnect()
 {
-    connect(m_topWidget, SIGNAL(goExamine()), m_bottomWidget, SLOT(goExamine()));
-    connect(m_topWidget, SIGNAL(goMain()), m_bottomWidget, SLOT(goMain()));
+    connect(m_topWidget, SIGNAL(goExamine()), m_tmpWidget, SLOT(goExamine()));
+    connect(m_topWidget, SIGNAL(goMain()), m_tmpWidget, SLOT(goMain()));
     connect(m_topWidget, SIGNAL(showMin()), this, SLOT(showMinimized()));
     connect(m_topWidget, SIGNAL(closeWidget()), this, SLOT(closeWidget()));
     connect(m_topWidget, SIGNAL(playVideo()), this, SLOT(playVideo()));
@@ -60,19 +60,19 @@ void MainWindow::initConnect()
     connect(m_safeWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
     connect(m_cleanWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
 //    connect(m_youhuaWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
-    connect(m_bottomWidget, SIGNAL(safeClicked()), this, SLOT(goToSafe()));
-    connect(m_bottomWidget, SIGNAL(cleanClicked()), this, SLOT(goToClean()));
-    connect(m_bottomWidget, SIGNAL(youhuaClicked()), this, SLOT(goToYouhua()));
-    connect(m_bottomWidget, SIGNAL(showMin()), this, SLOT(showMinimized()));
-    connect(m_bottomWidget, SIGNAL(closeWidget()), this, SLOT(closeWidget()));
-    connect(m_bottomWidget, SIGNAL(playVideo()), this, SLOT(playVideo()));
-    connect(m_bottomWidget, SIGNAL(showSkin()), this, SLOT(showSkin()));
+    connect(m_tmpWidget, SIGNAL(safeClicked()), this, SLOT(goToSafe()));
+    connect(m_tmpWidget, SIGNAL(cleanClicked()), this, SLOT(goToClean()));
+    connect(m_tmpWidget, SIGNAL(youhuaClicked()), this, SLOT(goToYouhua()));
+    connect(m_tmpWidget, SIGNAL(showMin()), this, SLOT(showMinimized()));
+    connect(m_tmpWidget, SIGNAL(closeWidget()), this, SLOT(closeWidget()));
+    connect(m_tmpWidget, SIGNAL(playVideo()), this, SLOT(playVideo()));
+    connect(m_tmpWidget, SIGNAL(showSkin()), this, SLOT(showSkin()));
     connect(m_upGroup, SIGNAL(finished()), this, SLOT(upAnimFinished()));
 }
 
 void MainWindow::initAnim()
 {
-    QPropertyAnimation *m_upMainAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
+    QPropertyAnimation *m_upMainAnimation = new QPropertyAnimation(m_tmpWidget, "pos");
     m_upMainAnimation->setDuration(200);
     m_upMainAnimation->setStartValue(QPoint(0, 0));
     m_upMainAnimation->setEndValue(QPoint(0, -200));
@@ -92,7 +92,7 @@ void MainWindow::initAnim()
     m_upGroup->addAnimation(m_downMainAnimation);
     m_upGroup->addAnimation(m_toTrans);
 
-    QPropertyAnimation *m_upGarAnimation = new QPropertyAnimation(m_bottomWidget, "pos");
+    QPropertyAnimation *m_upGarAnimation = new QPropertyAnimation(m_tmpWidget, "pos");
     m_upGarAnimation->setDuration(200);
     m_upGarAnimation->setStartValue(QPoint(0, -200));
     m_upGarAnimation->setEndValue(QPoint(0, 0));

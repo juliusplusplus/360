@@ -12,7 +12,7 @@ class MainTopWidget;
 class OpacityWidget;
 class QStackedWidget;
 class BaseStyleWidget;
-class MainBottomWidget;
+class MaintmpWidget;
 class QParallelAnimationGroup;
 
 class MainWindow : public ShadowWidget
@@ -46,7 +46,7 @@ private:
     MainTopWidget           *m_topWidget;
     OpacityWidget           *m_grayWidget;
     QStackedWidget          *m_stackWidget;
-    MainBottomWidget        *m_bottomWidget;
+    MaintmpWidget           *m_tmpWidget;
     QParallelAnimationGroup *m_upGroup;
     QParallelAnimationGroup *m_downGroup;
 };

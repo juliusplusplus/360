@@ -11,7 +11,6 @@ public:
     explicit SysButtonGroup(QWidget *parent = 0);
 
 signals:
-    void playVideo();
     void showSkin();
     void showMenu();
     void showMin();

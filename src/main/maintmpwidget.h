@@ -1,5 +1,5 @@
-#ifndef MAINBOTTOMWIDGET_H
-#define MAINBOTTOMWIDGET_H
+#ifndef MaintmpWidget_H
+#define MaintmpWidget_H
 
 #include "../common/basestylewidget.h"
 #include "../common/sysupdate.h"
@@ -9,7 +9,7 @@
 class QStackedLayout;
 class MainExamineWidget;
 class QPropertyAnimation;
-class MainBottomFirstWidget;
+class MainTmpFirstWidget;
 
 class QStackedWidget;
 class UserWidget;
@@ -18,12 +18,12 @@ class MainScoreWidget;
 class TopBottomWidget;
 class QParallelAnimationGroup;
 
-class MainBottomWidget : public BaseStyleWidget
+class MaintmpWidget : public BaseStyleWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainBottomWidget(QWidget *parent = 0);
+    explicit MaintmpWidget(QWidget *parent = 0);
     bool eventFilter(QObject *watched, QEvent *event);
 
 public slots:
@@ -42,7 +42,6 @@ signals:
     void youhuaClicked();
 //    void advtoolMoreClicked();
 
-    void playVideo();
     void showSkin();
     void showMenu();
     void showMin();
@@ -59,7 +58,7 @@ private:
     MainExamineWidget     *m_examineWidget;
     QPropertyAnimation    *m_examineAnimation;
     QPropertyAnimation    *m_returnAnimation;
-    MainBottomFirstWidget *m_firstWidget;
+    MainTmpFirstWidget      *m_firstWidget;
 
 
     QWidget                 *m_titleWidget;
@@ -69,4 +68,4 @@ private:
     QLabel            *suspendLabel;
 };
 
-#endif // MAINBOTTOMWIDGET_H
+#endif // MaintmpWidget_H

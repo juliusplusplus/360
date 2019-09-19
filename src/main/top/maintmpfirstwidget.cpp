@@ -1,4 +1,4 @@
-#include "mainbottomfirstwidget.h"
+#include "maintmpfirstWidget.h"
 #include "../common/buttonlabel.h"
 #include "../../common/staticbutton.h"
 #include "../common/backgroundbutton.h"
@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-MainBottomFirstWidget::MainBottomFirstWidget(QWidget *parent)
+MainTmpFirstWidget::MainTmpFirstWidget(QWidget *parent)
     : BaseStyleWidget(parent)
 {
     this->setStyleSheet("QWidget#firstWidget{background:white;}");
@@ -16,32 +16,32 @@ MainBottomFirstWidget::MainBottomFirstWidget(QWidget *parent)
     this->initConnect();
 }
 
-void MainBottomFirstWidget::initUI()
+void MainTmpFirstWidget::initUI()
 {
     m_safeButton = new StaticButton(":/main/safe_check");
     QLabel *safeLabel = new QLabel(QStringLiteral("病毒查杀"));
-    safeLabel->setObjectName("mainBottomLabel");
+    safeLabel->setObjectName("mainTmpLabel");
     QVBoxLayout *safeLayout = new QVBoxLayout();
     safeLayout->addWidget(m_safeButton, 0, Qt::AlignCenter);
     safeLayout->addWidget(safeLabel, 0, Qt::AlignCenter);
 
     m_cleanButton = new StaticButton(":/main/clean");
     QLabel *cleanLabel = new QLabel(QStringLiteral("漏洞管理"));
-    cleanLabel->setObjectName("mainBottomLabel");
+    cleanLabel->setObjectName("mainTmpLabel");
     QVBoxLayout *cleanLayout = new QVBoxLayout();
     cleanLayout->addWidget(m_cleanButton, 0, Qt::AlignCenter);
     cleanLayout->addWidget(cleanLabel, 0, Qt::AlignCenter);
 
     m_youhuaButton = new StaticButton(":/main/youhua");
     QLabel *youhuaLabel = new QLabel(QStringLiteral("网马查杀"));
-    youhuaLabel->setObjectName("mainBottomLabel");
+    youhuaLabel->setObjectName("mainTmpLabel");
     QVBoxLayout *youhuaLayout = new QVBoxLayout();
     youhuaLayout->addWidget(m_youhuaButton, 0, Qt::AlignCenter);
     youhuaLayout->addWidget(youhuaLabel, 0, Qt::AlignCenter);
 
     m_webButton = new StaticButton(":/main/youhua");
     QLabel *webLabel = new QLabel(QStringLiteral("Web防护"));
-    webLabel->setObjectName("mainBottomLabel");
+    webLabel->setObjectName("mainTmpLabel");
     QVBoxLayout *webLayout = new QVBoxLayout();
     webLayout->addWidget(m_webButton, 0, Qt::AlignCenter);
     webLayout->addWidget(webLabel, 0, Qt::AlignCenter);
@@ -80,7 +80,7 @@ void MainBottomFirstWidget::initUI()
     this->setLayout(mainLayout);
 }
 
-void MainBottomFirstWidget::initConnect()
+void MainTmpFirstWidget::initConnect()
 {
     connect(m_safeButton, SIGNAL(buttonClicked()), this, SIGNAL(safeClicked()));
     connect(m_cleanButton, SIGNAL(buttonClicked()), this, SIGNAL(cleanClicked()));

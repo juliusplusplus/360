@@ -13,7 +13,7 @@ QLabel#bottomlabel{
     font-size: 15px;
 }
 
-QLabel#mainBottomLabel{
+QLabel#mainTmpLabel{
     color:black;
     font-size: 15px;
 }

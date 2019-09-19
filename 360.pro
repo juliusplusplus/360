@@ -44,7 +44,6 @@ SOURCES += main.cpp \
     src/main/top/mainscorewidget.cpp \
     src/main/mainwindow.cpp \
     src/main/maintopwidget.cpp \
-    src/main/mainbottomwidget.cpp \
     src/optimize/common/youhuascanbottom.cpp \
     src/safe/safewidget.cpp \
     src/safe/safetopwidget.cpp \
@@ -57,11 +56,17 @@ SOURCES += main.cpp \
     src/clean/common/cleandynamicbuttonwidget.cpp \
     src/clean/cleanwidget.cpp \
     src/common/safebuttonwidget.cpp \
-    src/main/bottom/mainbottomfirstwidget.cpp \
     src/optimize/youhuawidget.cpp \
     src/safe/customscan.cpp \
     src/common/sysupdate.cpp \
-    src/common/update_wait.cpp
+    src/common/update_wait.cpp \
+    src/main/maintmpwidget.cpp \
+    src/main/bottom/maintmpfirstwidget.cpp \
+    src/main/top/mainexaminewidget.cpp \
+    src/main/top/maintmpfirstwidget.cpp \
+    src/main/bottom/mainscorewidget.cpp \
+    src/main/bottom/topbottomwidget.cpp \
+    src/main/bottom/userwidget.cpp
 
 HEADERS  += \
     src/clean/common/cleanscanbottom.h \
@@ -93,7 +98,6 @@ HEADERS  += \
     src/main/top/mainscorewidget.h \
     src/main/mainwindow.h \
     src/main/maintopwidget.h \
-    src/main/mainbottomwidget.h \
     src/optimize/common/youhuascanbottom.h \
     src/optimize/youhuawidget.h \
     src/safe/safewidget.h \
@@ -104,7 +108,6 @@ HEADERS  += \
     src/optimize/common/optimizebutton.h \
     src/clean/cleanwidget.h \
     src/main/common/shadowwidget.h \
-    src/main/bottom/mainbottomfirstwidget.h \
     src/clean/common/cleandynamicbuttonwidget.h \
     src/common/animbuttonwidget.h \
     src/common/basestylewidget.h \
@@ -114,7 +117,14 @@ HEADERS  += \
     src/safe/common/scanbuttonwidget.h \
     src/safe/customscan.h \
     src/common/sysupdate.h \
-    src/common/update_wait.h
+    src/common/update_wait.h \
+    src/main/maintmpwidget.h \
+    src/main/bottom/maintmpfirstwidget.h \
+    src/main/top/mainexaminewidget.h \
+    src/main/top/maintmpfirstwidget.h \
+    src/main/bottom/mainscorewidget.h \
+    src/main/bottom/topbottomwidget.h \
+    src/main/bottom/userwidget.h
 
 RESOURCES += \
     resource/360.qrc
