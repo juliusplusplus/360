@@ -75,7 +75,8 @@ void MainBottomWidget::initUI()
     m_scoreWidget = new MainScoreWidget(this);
     m_scoreWidget->setButtonStatus(SCORE_NO_BUTTON);
     m_scoreWidget->setScoreStatus(SCORE_QUESTION);
-    m_scoreWidget->setTextInfo(QStringLiteral("建议体检"), QStringLiteral("建议每天进行体检"));
+    // TODO 之后要重写这个函数来增加时间的记录
+    m_scoreWidget->setTextInfo(QStringLiteral("常扫描，更健康"), QStringLiteral("上次扫描时间为")/*,LastTime*/);
     m_scoreWidget->setFixedWidth(width());
 
     m_bottomWidget = new TopBottomWidget(this);
