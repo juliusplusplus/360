@@ -38,7 +38,7 @@ private slots:
     void upAnimFinished();
 
 private:
-    SafeWidget              *m_safeWidget;
+    MainBottomWidget              *m_safeWidget;
     VideoWidget             *m_video;
     CleanWidget             *m_cleanWidget;
     YouhuaWidget            *m_youhuaWidget;

@@ -30,7 +30,7 @@ void MainWindow::initUI()
     this->setWindowTitle(QStringLiteral("360安全卫士"));
     m_video = new VideoWidget(this);
     m_stackWidget = new QStackedWidget(this);
-    m_stackWidget->setGeometry(rect());
+    m_stackWidget->setGeometry(0,200,900,400);
     m_stackWidget->lower();
 
     //m_grayWidget = new BaseStyleWidget(this);
@@ -41,7 +41,7 @@ void MainWindow::initUI()
     m_bottomWidget = new MainBottomWidget(this);
     m_topWidget = new MaintopWidget(this);
 
-    m_safeWidget = new SafeWidget(this);
+    m_safeWidget = new MainBottomWidget(this);
     m_stackWidget->addWidget(m_safeWidget);
     m_cleanWidget = new CleanWidget(this);
     m_stackWidget->addWidget(m_cleanWidget);
@@ -131,7 +131,7 @@ void MainWindow::goToMain()
 void MainWindow::goToSafe()
 {
     m_stackWidget->setCurrentIndex(0);
-    m_upGroup->start();
+//    m_upGroup->start();
 }
 
 void MainWindow::goToClean()

@@ -24,10 +24,11 @@ MainBottomWidget::MainBottomWidget(QWidget *parent)
 
 void MainBottomWidget::initAnimations()
 {
-    QRect mainRect(0, 0, width(), 240);
+    QRect mainRect(0, 200, width(), 240);
     QRect origRect = rect();
     QPoint origPoint = m_scoreWidget->pos();
-    QPoint toPoint(0, m_userWidget->height() + 10);
+    QPoint toPoint(0, m_scoreWidget->height() + 10);
+//    QPoint toPoint(0, m_userWidget->height() + 10);
 //    QPoint toPoint(0, m_titleWidget->height() + 10);
 
     QPropertyAnimation *mainExamineAnim = new QPropertyAnimation(this, "geometry");
@@ -64,14 +65,12 @@ void MainBottomWidget::initUI()
 {
     //this->setFixedSize(m_wenliPix.size());
     this->setGeometry(0, 200, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
-//    this->setGeometry(0, 0, MAIN_TOP_WIDTH, MAIN_TOP_HEIGHT);
     m_backgroundWidget = new WenliWidget(this);
     m_backgroundWidget->setGeometry(rect());
     m_backgroundWidget->lower();
-//    this->initTopTitleWidget();
 
-    m_userWidget = new  UserWidget(this);
-    m_userWidget->setFixedWidth(width());
+//    m_userWidget = new  UserWidget(this);
+//    m_userWidget->setFixedWidth(width());
 
     m_scoreWidget = new MainScoreWidget(this);
     m_scoreWidget->setButtonStatus(SCORE_NO_BUTTON);
@@ -99,13 +98,13 @@ void MainBottomWidget::setNums(int num)
 void MainBottomWidget::updateSizeAndPos()
 {
 //    m_userWidget->move(0, m_titleWidget->y() + m_titleWidget->height() + 10);
-    m_scoreWidget->move(0, m_userWidget->y() + m_userWidget->height() + 10);
+//    m_scoreWidget->move(0, m_userWidget->y() + m_userWidget->height() + 10);
     m_bottomWidget->move(0, m_scoreWidget->y() + m_scoreWidget->height() + 10);
 }
 
 void MainBottomWidget::returnAnimationFinished()
 {
-    m_userWidget->show();
+//    m_userWidget->show();
     m_bottomWidget->show();
 }
 
@@ -121,7 +120,7 @@ void MainBottomWidget::returnMain()
 void MainBottomWidget::examineClicked()
 {
     m_titleStacked->setCurrentIndex(1);
-    m_userWidget->hide();
+//    m_userWidget->hide();
     m_bottomWidget->hide();
     m_scoreWidget->setButtonStatus(SCORE_FIX_BUTTON);
     m_scoreWidget->setNums(85);
@@ -133,7 +132,7 @@ void MainBottomWidget::examineClicked()
 void MainBottomWidget::viewClicked()
 {
     m_titleStacked->setCurrentIndex(1);
-    m_userWidget->hide();
+//    m_userWidget->hide();
     m_bottomWidget->hide();
     m_examineGroupAnimation->start();
     emit goExamine();
