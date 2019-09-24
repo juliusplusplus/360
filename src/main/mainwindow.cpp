@@ -4,6 +4,7 @@
 #include "../safe/safewidget.h"
 #include "common/videowidget.h"
 #include "../clean/cleanwidget.h"
+#include "../optimize/youhuawidget.h"
 #include "common/opacitywidget.h"
 #include "../optimize/common/optimizebutton.h"
 
@@ -45,8 +46,8 @@ void MainWindow::initUI()
     m_stackWidget->addWidget(m_safeWidget);
     m_cleanWidget = new CleanWidget(this);
     m_stackWidget->addWidget(m_cleanWidget);
-//    m_youhuaWidget = new YouhuaWidget;
-//    m_stackWidget->addWidget(m_youhuaWidget);
+    m_youhuaWidget = new YouhuaWidget();
+    m_stackWidget->addWidget(m_youhuaWidget);
 }
 
 void MainWindow::initConnect()
@@ -56,7 +57,7 @@ void MainWindow::initConnect()
     connect(m_bottomWidget, SIGNAL(showMin()), this, SLOT(showMinimized()));
     connect(m_bottomWidget, SIGNAL(closeWidget()), this, SLOT(closeWidget()));
     connect(m_bottomWidget, SIGNAL(showSkin()), this, SLOT(showSkin()));
-    connect(m_safeWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
+//    connect(m_safeWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
     connect(m_cleanWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
 //    connect(m_youhuaWidget, SIGNAL(goToMain()), this, SLOT(goToMain()));
     connect(m_topWidget, SIGNAL(safeClicked()), this, SLOT(goToSafe()));

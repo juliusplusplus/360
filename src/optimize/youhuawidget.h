@@ -5,6 +5,7 @@
 class YouhuaScanBottom;
 class WenliBackWidget;
 class StackStatusWidget;
+class QPushButton;
 
 class YouhuaWidget : public QWidget
 {
@@ -20,6 +21,9 @@ private:
     WenliBackWidget *m_topBackWidget;
     StackStatusWidget   *m_stackStatusWidget;
     YouhuaScanBottom  *m_scanBottomWidget;
+
+    QPushButton *btn1;
+    QPushButton *btn2;
 };
 
 #endif // YOUHUAWIDGET_H

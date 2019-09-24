@@ -111,6 +111,8 @@
         <file alias="video_close">video/close.png</file>
         <file alias="video_end">video/end.png</file>
         <file alias="video_start">video/start.png</file>
+        <file>default_theme/MainFrame/Image/arrow.png</file>
+        <file>default_theme/MainFrame/Image/arrow.jpg</file>
     </qresource>
     <qresource prefix="/numbers/main">
         <file alias="0">default_theme/font/tijian_score/0.png</file>

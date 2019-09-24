@@ -2,8 +2,13 @@
 #define TOPBOTTOMWIDGET_H
 
 #include <QWidget>
+
+#include "switchwidget.h"
+#include "../../safe/customscan.h"
+
 class StaticButton;
 class QStackedWidget;
+class QPushButton;
 
 class TopBottomWidget : public QWidget
 {
@@ -17,6 +22,14 @@ signals:
     void securityClicked();
     void examineClicked();
     void viewClicked();
+
+
+private slots:
+    void showSwitch();
+    void quickClicked();
+    void fullClicked();
+    void customClicked();
+
 private:
     void initUI();
     void initConnect();
@@ -26,6 +39,11 @@ private:
     StaticButton *m_securityButton;
     StaticButton *m_examineButton;
     StaticButton *m_viewButton;
+
+    QPushButton  *switch_button;
+    QPushButton  *quick_button;
+    SwitchWidget *m_switchwidget;
+    CustomScan   *m_scan;
 };
 
 #endif // TOPBOTTOMWIDGET_H

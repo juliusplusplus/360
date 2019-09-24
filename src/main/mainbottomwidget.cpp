@@ -72,6 +72,7 @@ void MainBottomWidget::initUI()
 //    m_userWidget = new  UserWidget(this);
 //    m_userWidget->setFixedWidth(width());
 
+
     m_scoreWidget = new MainScoreWidget(this);
     m_scoreWidget->setButtonStatus(SCORE_NO_BUTTON);
     m_scoreWidget->setScoreStatus(SCORE_QUESTION);

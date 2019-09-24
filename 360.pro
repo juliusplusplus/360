@@ -61,7 +61,8 @@ SOURCES += main.cpp \
     src/main/bottom/userwidget.cpp \
     src/main/mainbottomwidget.cpp \
     src/main/maintopwidget.cpp \
-    src/main/top/maintopfirstwidget.cpp
+    src/main/top/maintopfirstwidget.cpp \
+    src/main/bottom/switchwidget.cpp
 
 HEADERS  += \
     src/clean/common/cleanscanbottom.h \
@@ -114,7 +115,8 @@ HEADERS  += \
     src/main/bottom/userwidget.h \
     src/main/mainbottomwidget.h \
     src/main/maintopwidget.h \
-    src/main/top/maintopfirstwidget.h
+    src/main/top/maintopfirstwidget.h \
+    src/main/bottom/switchwidget.h
 
 RESOURCES += \
     resource/360.qrc

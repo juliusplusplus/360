@@ -156,3 +156,8 @@ YouhuaButton#diskButton{
     qproperty-title: "硬盘加速";
     qproperty-description: "优化硬盘传输效率";
 }
+QPushButton#buttontest{
+    color:black;
+    border:0px;
+    font-size: 25px;
+}
