@@ -15,6 +15,7 @@ class TopBottomWidget : public QWidget
     Q_OBJECT
 public:
     explicit TopBottomWidget(QWidget *parent = 0);
+
 public slots:
     void setStackedButton(int index);
 signals:

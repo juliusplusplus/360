@@ -62,7 +62,7 @@ void TopBottomWidget::initUI()
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(safeLayout);
-    mainLayout->addLayout(hLayout);
+//    mainLayout->addLayout(hLayout);
     this->setLayout(mainLayout);
 }
 
@@ -85,15 +85,25 @@ void TopBottomWidget::setStackedButton(int index)
 
 void TopBottomWidget::showSwitch()
 {
-    QPoint oPoint = switch_button->mapToGlobal(QPoint(-quick_button->width(), switch_button->height()));
-    m_switchwidget->move(oPoint);
-    m_switchwidget->show();
+    if(m_switchwidget->isHidden()){
+        qDebug()<<"sss";
+        QPoint oPoint = switch_button->mapToGlobal(QPoint(-quick_button->width(), switch_button->height()));
+        m_switchwidget->move(oPoint);
+        //TODO 現在用的是非模式对话框，但是这样主界面可触碰，没法阻塞了，用其他模式的话没法再次点击按钮关闭
+        m_switchwidget->setModal(false);
+        m_switchwidget->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+        m_switchwidget->show();
+    }else {
+        qDebug()<<"ttt ";
+        m_switchwidget->close();
+    }
 }
 
 void TopBottomWidget::quickClicked()
 {
     qDebug()<<"quick !";
 }
+
 void TopBottomWidget::fullClicked()
 {
     qDebug()<<"full ! ";
@@ -108,3 +118,4 @@ void TopBottomWidget::customClicked()
 //                                                      tr("Images (*.png *.xpm *.jpg)"));
     m_scan->exec();
 }
+

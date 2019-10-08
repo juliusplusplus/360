@@ -23,7 +23,7 @@ SwitchWidget::SwitchWidget(QWidget *parent)
 
     this->setLayout(main_layout);
     this->translateLanguage();
-
+    this->initConnect();
 
 }
 
