@@ -15,7 +15,13 @@ MainScoreWidget::MainScoreWidget(QWidget *parent) :
 
 void MainScoreWidget::initUI()
 {
-    m_scoreWidget = new ScoreWidget;
+//    m_scoreWidget = new ScoreWidget;
+    m_leftlael = new QLabel;
+    //似乎没效果
+//    m_leftlael->setGeometry(QRect(100,100,600,600));
+    QPixmap leftPix(":/main/examine_score");
+    m_leftlael->setFixedSize(leftPix.size());
+    m_leftlael->setPixmap(leftPix);
     m_topLabel = new QLabel;
     m_topLabel->setObjectName("toplabel");
     m_bottomLabel = new QLabel;
@@ -32,14 +38,16 @@ void MainScoreWidget::initUI()
     this->initButtonLayout();
     QHBoxLayout *hLayout = new QHBoxLayout;
     hLayout->addSpacing(20);
-    hLayout->addWidget(m_scoreWidget);
+    hLayout->addWidget(m_leftlael);
+//    hLayout->addWidget(m_scoreWidget);
     hLayout->addSpacing(10);
     hLayout->addLayout(vLayout);
     hLayout->addWidget(m_stackedWidget, 0, Qt::AlignRight | Qt::AlignVCenter);
     hLayout->setContentsMargins(10, 5, 10, 5);
 
     this->setLayout(hLayout);
-    this->setFixedHeight(m_scoreWidget->height() + 10);
+    this->setFixedHeight(m_leftlael->height() + 100);
+//    this->setFixedHeight(m_scoreWidget->height() + 10);
 }
 
 void MainScoreWidget::initButtonLayout()
@@ -91,12 +99,12 @@ void MainScoreWidget::setButtonStatus(int status)
 
 void MainScoreWidget::setScoreStatus(int status)
 {
-    m_scoreWidget->setScoreStatus(status);
+//    m_scoreWidget->setScoreStatus(status);
 }
 
 void MainScoreWidget::setNums(int num)
 {
-    m_scoreWidget->setNums(num);
+//    m_scoreWidget->setNums(num);
 }
 
 void MainScoreWidget::setTextInfo(const QString &topText, const QString &bottomText)

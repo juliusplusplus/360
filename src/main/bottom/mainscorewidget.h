@@ -27,6 +27,7 @@ private:
     QLabel *m_topLabel;
     QLabel *m_bottomLabel;
     ScoreWidget *m_scoreWidget;
+    QLabel *m_leftlael;
     QStackedWidget *m_stackedWidget;
 };
 
