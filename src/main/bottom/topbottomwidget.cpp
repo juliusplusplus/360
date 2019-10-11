@@ -43,26 +43,30 @@ void TopBottomWidget::initUI()
     m_viewButton = new StaticButton(":/main/btn_view_detail");
     m_stacked->addWidget(m_viewButton);
 
+    //TODO 具体时间没加
+    m_virustime = new QLabel(tr("病毒库时间："));
+    x_virustime = new QLabel(tr("09/26/2018"));
+    m_isolateButton = new QPushButton("隔离区");
+    m_isolateButton->setObjectName("buttontest");
+    m_trustButton= new QPushButton(tr("信任区"));
+    m_trustButton->setObjectName("buttontest");
 
-    m_payinsureButton = new StaticButton(":/main/payinsure_safe", true);
-    m_securityButton = new StaticButton(":/main/security_safe", true);
-    QLabel *line = new QLabel;
-    QPixmap pix(":/main/guardline");
-    line->setPixmap(pix);
-    line->setFixedSize(pix.size());
     QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->addWidget(m_payinsureButton);
-    hLayout->addWidget(line);
-    hLayout->addSpacing(15);
-    hLayout->addWidget(m_securityButton);
+    hLayout->addWidget(m_virustime);
+    hLayout->addWidget(x_virustime);
     hLayout->addStretch();
-    hLayout->setSpacing(5);
-    hLayout->setContentsMargins(15, 10, 10, 30);
+    hLayout->addWidget(m_isolateButton);
+    hLayout->addWidget(m_trustButton);
+//    hLayout->setSpacing(5);
+//    hLayout->setContentsMargins(15, 10, 10, 30);
 
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->addLayout(safeLayout);
-//    mainLayout->addLayout(hLayout);
+//    mainLayout->setStretchFactor(safeLayout,5);
+    mainLayout->addStretch();
+    mainLayout->addLayout(hLayout);
+//    mainLayout->setStretchFactor(hLayout,1);
     this->setLayout(mainLayout);
 }
 
@@ -70,8 +74,8 @@ void TopBottomWidget::initConnect()
 {
     connect(m_examineButton, SIGNAL(buttonClicked()), this, SIGNAL(examineClicked()));
     connect(m_viewButton, SIGNAL(buttonClicked()), this, SIGNAL(viewClicked()));
-    connect(m_payinsureButton, SIGNAL(buttonClicked()), this, SIGNAL(payinsureClicked()));
-    connect(m_securityButton, SIGNAL(buttonClicked()), this, SIGNAL(securityClicked()));
+//    connect(m_payinsureButton, SIGNAL(buttonClicked()), this, SIGNAL(payinsureClicked()));
+//    connect(m_securityButton, SIGNAL(buttonClicked()), this, SIGNAL(securityClicked()));
     connect(switch_button,SIGNAL(clicked(bool)),this,SLOT(showSwitch()));
     connect(quick_button,SIGNAL(clicked(bool)),this,SLOT(quickClicked()));
     connect(m_switchwidget,SIGNAL(fullClicked()),this,SLOT(fullClicked()));

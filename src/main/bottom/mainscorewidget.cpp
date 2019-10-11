@@ -31,7 +31,7 @@ void MainScoreWidget::initUI()
 
     this->initButtonLayout();
     QHBoxLayout *hLayout = new QHBoxLayout;
-    hLayout->addSpacing(10);
+    hLayout->addSpacing(20);
     hLayout->addWidget(m_scoreWidget);
     hLayout->addSpacing(10);
     hLayout->addLayout(vLayout);

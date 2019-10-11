@@ -36,8 +36,8 @@ private:
     void initConnect();
 private:
     QStackedWidget *m_stacked;
-    StaticButton *m_payinsureButton;
-    StaticButton *m_securityButton;
+//    StaticButton *m_payinsureButton;
+//    StaticButton *m_securityButton;
     StaticButton *m_examineButton;
     StaticButton *m_viewButton;
 
@@ -45,6 +45,10 @@ private:
     QPushButton  *quick_button;
     SwitchWidget *m_switchwidget;
     CustomScan   *m_scan;
+    QLabel       *m_virustime;
+    QLabel       *x_virustime;
+    QPushButton  *m_isolateButton;
+    QPushButton  *m_trustButton;
 };
 
 #endif // TOPBOTTOMWIDGET_H
